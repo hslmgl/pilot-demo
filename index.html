@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#080b10" />
+  <meta name="color-scheme" content="dark" />
+  <title>Pilot — Medya Asistanı</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <style>
+    :root{
+      --bg:#080b10;--panel:#10151d;--panel2:#151c26;--line:#263140;--text:#f4f7fb;--muted:#95a3b7;
+      --accent:#8ea6ff;--accent2:#b8c5ff;--good:#7dd3a7;--warn:#ffd27a;--danger:#ff9b9b;
+      --radius:22px;--shadow:0 18px 55px rgba(0,0,0,.34)
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Roboto,"Noto Sans",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+    body{min-height:100dvh}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    .app{max-width:760px;margin:0 auto;min-height:100dvh;padding:env(safe-area-inset-top) 18px calc(88px + env(safe-area-inset-bottom))}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 2px 12px;position:sticky;top:0;background:linear-gradient(var(--bg) 78%,transparent);z-index:8}
+    .brand{display:flex;gap:12px;align-items:center}.mark{width:38px;height:38px;border:1px solid var(--line);border-radius:14px;display:grid;place-items:center;background:var(--panel)}
+    .mark svg{width:21px}.brand b{font-size:18px;letter-spacing:.3px}.brand small{display:block;color:var(--muted);margin-top:2px}
+    .iconbtn{width:42px;height:42px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--text)}
+    .screen{display:none;animation:fade .24s ease}.screen.active{display:block}@keyframes fade{from{opacity:.3;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .hero{padding:34px 4px 18px}.eyebrow{color:var(--accent2);font-size:13px;letter-spacing:.12em;text-transform:uppercase}.hero h1{font-size:38px;line-height:1.08;margin:12px 0 14px;font-weight:650}.hero p{font-size:17px;line-height:1.55;color:var(--muted);margin:0}
+    .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:18px 0}.trust div{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px 12px;min-height:92px}.trust b{display:block;font-size:14px;margin-top:9px}.trust span{font-size:12px;color:var(--muted)}
+    .primary,.secondary,.ghost{width:100%;border-radius:18px;padding:16px 18px;border:1px solid transparent;font-weight:650;min-height:56px}.primary{background:var(--accent);color:#0b1020}.secondary{background:var(--panel2);border-color:var(--line);color:var(--text);margin-top:10px}.ghost{background:transparent;border-color:var(--line);color:var(--muted);margin-top:10px}
+    .section-title{display:flex;align-items:end;justify-content:space-between;margin:26px 2px 12px}.section-title h2{font-size:20px;margin:0}.section-title span{font-size:13px;color:var(--muted)}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.metric{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px}.metric span{color:var(--muted);font-size:13px}.metric strong{display:block;font-size:24px;margin-top:6px}.metric small{display:block;color:var(--muted);margin-top:4px}
+    .scanbox{text-align:center;padding:36px 20px}.orb{width:96px;height:96px;border-radius:50%;margin:0 auto 20px;background:radial-gradient(circle at 35% 30%,#dbe2ff, var(--accent) 35%,#394a87 72%);box-shadow:0 0 0 12px rgba(142,166,255,.08),0 0 0 24px rgba(142,166,255,.035);animation:pulse 1.8s infinite}@keyframes pulse{50%{transform:scale(1.04);box-shadow:0 0 0 18px rgba(142,166,255,.05),0 0 0 32px rgba(142,166,255,.02)}}
+    .progress{height:10px;background:#202938;border-radius:999px;overflow:hidden;margin:22px 0 9px}.progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+    .row{display:flex;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}.row:last-child{border:0}.thumb{width:52px;height:52px;border-radius:14px;background:var(--panel2);display:grid;place-items:center;font-size:24px;flex:0 0 auto}.row .info{min-width:0;flex:1}.row b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.row small{color:var(--muted)}.badge{font-size:12px;border-radius:999px;padding:6px 9px;background:var(--panel2);border:1px solid var(--line);white-space:nowrap}.badge.good{color:var(--good)}.badge.warn{color:var(--warn)}
+    .suggestion{margin-bottom:10px}.suggestion header{display:flex;justify-content:space-between;gap:12px}.suggestion h3{margin:0 0 5px;font-size:17px}.suggestion p{color:var(--muted);margin:0;line-height:1.45}.suggestion footer{display:flex;gap:8px;margin-top:14px}.mini{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:10px 12px;border-radius:14px;flex:1}.mini.accent{background:var(--accent);color:#0b1020;border-color:transparent}
+    .bottomnav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(760px,100%);padding:10px 18px calc(10px + env(safe-area-inset-bottom));background:rgba(8,11,16,.92);backdrop-filter:blur(16px);display:grid;grid-template-columns:repeat(4,1fr);gap:8px;border-top:1px solid var(--line);z-index:12}.navbtn{border:0;background:transparent;color:var(--muted);padding:8px 2px;border-radius:14px;font-size:12px}.navbtn span{display:block;font-size:20px;margin-bottom:3px}.navbtn.active{background:var(--panel2);color:var(--text)}
+    .empty{padding:34px 18px;text-align:center;color:var(--muted)}
+    .switchline{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}.switchline:last-child{border:0}.switch{width:50px;height:30px;border-radius:999px;background:#2a3442;padding:3px;border:0}.switch i{display:block;width:24px;height:24px;border-radius:50%;background:#fff;transition:.2s}.switch.on{background:var(--accent)}.switch.on i{transform:translateX(20px)}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-end;z-index:30}.modal.show{display:flex}.sheet{width:min(760px,100%);margin:auto;background:var(--panel);border:1px solid var(--line);border-radius:28px 28px 0 0;padding:22px 18px calc(24px + env(safe-area-inset-bottom))}.sheet h3{margin:0 0 8px}.sheet p{color:var(--muted);line-height:1.5}.fileinput{display:none}
+    .privacy{font-size:12px;color:var(--muted);text-align:center;margin:14px 0 0}.notice{background:rgba(125,211,167,.08);border:1px solid rgba(125,211,167,.28);color:#c8f5dc;padding:12px 14px;border-radius:16px;margin:12px 0}
+    @media(max-width:440px){.hero h1{font-size:32px}.trust{grid-template-columns:1fr}.trust div{min-height:auto}.metric-grid{grid-template-columns:1fr 1fr}.app{padding-left:14px;padding-right:14px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7 4v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V7l7-4z"/><path d="M9 12l2 2 4-4"/></svg></div><div><b>Pilot</b><small>Medya asistanı</small></div></div>
+    <button class="iconbtn" id="installBtn" title="Yükle">＋</button>
+  </header>
+
+  <main>
+    <section class="screen active" data-screen="home">
+      <div class="hero"><div class="eyebrow">Kontrol sende</div><h1>Galerin dağınık değil.<br>Sadece bir pilota ihtiyacı var.</h1><p>Pilot, fotoğraf ve videolarını cihazında analiz eder; neyin düzenlenebileceğini gösterir. Hiçbir şeyi sen onaylamadan değiştirmez.</p></div>
+      <div class="trust"><div>🔒<b>Yerel analiz</b><span>Dosyaların yüklenmez</span></div><div>👁️<b>Önce gösterir</b><span>İlk tarama salt okunur</span></div><div>↩️<b>Geri alınabilir</b><span>Her işlem kayıtlıdır</span></div></div>
+      <button class="primary" id="pickBtn">Galerimden medya seç</button>
+      <button class="secondary" id="demoBtn">Hazır demo verisiyle dene</button>
+      <input class="fileinput" id="filePicker" type="file" accept="image/*,video/*" multiple />
+      <p class="privacy">Demo sürümü yalnızca seçtiğin dosyalara erişir. Silme ve taşıma işlemleri simülasyondur.</p>
+      <div class="section-title"><h2>Pilot ne yapacak?</h2><span>v1 demo</span></div>
+      <div class="card">
+        <div class="row"><div class="thumb">🧭</div><div class="info"><b>Akıllı tarama</b><small>Fotoğraf, video, ekran görüntüsü ve büyük dosyalar</small></div></div>
+        <div class="row"><div class="thumb">✨</div><div class="info"><b>Öneri kutusu</b><small>Silmeden önce nedenini ve kazancı gösterir</small></div></div>
+        <div class="row"><div class="thumb">🛟</div><div class="info"><b>Güvenli işlem</b><small>Bu demoda her değişiklik yalnızca simülasyondur</small></div></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="scan">
+      <div class="section-title"><h2>Tarama</h2><span id="scanCount">0 öğe</span></div>
+      <div class="card scanbox"><div class="orb"></div><h2 id="scanTitle">Medyan hazırlanıyor</h2><p id="scanStatus" style="color:var(--muted)">Seçilen dosyalar cihazında inceleniyor.</p><div class="progress"><i id="progressBar"></i></div><small id="progressText">%0</small></div>
+      <div class="notice">İlk tarama hiçbir dosyayı değiştirmez.</div>
+    </section>
+
+    <section class="screen" data-screen="results">
+      <div class="section-title"><h2>Galeri özeti</h2><span id="resultDate"></span></div>
+      <div class="metric-grid">
+        <div class="metric"><span>Fotoğraf</span><strong id="mPhotos">0</strong><small>seçilen içerik</small></div>
+        <div class="metric"><span>Video</span><strong id="mVideos">0</strong><small>seçilen içerik</small></div>
+        <div class="metric"><span>Toplam boyut</span><strong id="mSize">0 MB</strong><small>yerel hesaplama</small></div>
+        <div class="metric"><span>Öneri</span><strong id="mSuggestions">0</strong><small>incelemeye hazır</small></div>
+      </div>
+      <div class="section-title"><h2>Öneriler</h2><span>AI destekli kurallar</span></div>
+      <div id="suggestions"></div>
+    </section>
+
+    <section class="screen" data-screen="review">
+      <div class="section-title"><h2>İnceleme kuyruğu</h2><span id="queueCount">0 seçim</span></div>
+      <div id="queueList" class="card"><div class="empty">Henüz bir öneri seçmedin.</div></div>
+      <button class="primary" id="simulateBtn" style="margin-top:14px">Seçilen işlemleri simüle et</button>
+      <button class="ghost" id="clearQueue">Kuyruğu temizle</button>
+    </section>
+
+    <section class="screen" data-screen="settings">
+      <div class="section-title"><h2>Ayarlar</h2><span>Gizlilik odaklı</span></div>
+      <div class="card">
+        <div class="switchline"><div><b>Yalnızca cihazda analiz</b><small style="display:block;color:var(--muted)">Sunucuya dosya gönderme</small></div><button class="switch on"><i></i></button></div>
+        <div class="switchline"><div><b>İşlem öncesi onay</b><small style="display:block;color:var(--muted)">Her adımda sor</small></div><button class="switch on"><i></i></button></div>
+        <div class="switchline"><div><b>Demo güvenlik modu</b><small style="display:block;color:var(--muted)">Taşıma/silme simülasyonu</small></div><button class="switch on"><i></i></button></div>
+      </div>
+      <div class="section-title"><h2>Hakkında</h2></div>
+      <div class="card"><p style="margin-top:0">Pilot PWA Demo v1</p><p style="color:var(--muted);line-height:1.5;margin-bottom:0">Amaç: gerçek Android uygulamasına geçmeden önce ürün akışını, güven hissini ve öneri sistemini telefonda test etmek.</p></div>
+    </section>
+  </main>
+</div>
+
+<nav class="bottomnav">
+  <button class="navbtn active" data-go="home"><span>⌂</span>Ana sayfa</button>
+  <button class="navbtn" data-go="results"><span>◫</span>Özet</button>
+  <button class="navbtn" data-go="review"><span>✓</span>İncele</button>
+  <button class="navbtn" data-go="settings"><span>⚙</span>Ayarlar</button>
+</nav>
+
+<div class="modal" id="modal"><div class="sheet"><h3 id="modalTitle">İşlem tamamlandı</h3><p id="modalText"></p><button class="primary" id="modalClose">Tamam</button></div></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const state={files:[],stats:null,queue:[]};
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('#installBtn').textContent='↓'});
+$('#installBtn').addEventListener('click',async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null}else{showModal('Ana ekrana ekle','Chrome menüsünden “Ana ekrana ekle” veya “Uygulamayı yükle” seçeneğini kullanabilirsin.')}});
+function go(name){$$('.screen').forEach(x=>x.classList.toggle('active',x.dataset.screen===name));$$('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.go===name));scrollTo({top:0,behavior:'smooth'})}
+$$('.navbtn').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+$('#pickBtn').addEventListener('click',()=>$('#filePicker').click());
+$('#filePicker').addEventListener('change',e=>{const files=[...e.target.files];if(files.length) startScan(files)});
+$('#demoBtn').addEventListener('click',()=>startScan(makeDemoFiles(),true));
+function makeDemoFiles(){return [
+ {name:'IMG_20260719_104211.jpg',type:'image/jpeg',size:3.2e6,lastModified:Date.now()-86400000},
+ {name:'Screenshot_2026-07-18-22-10-07.png',type:'image/png',size:1.1e6,lastModified:Date.now()-2*86400000},
+ {name:'Screenshot_2026-07-18-22-11-04.png',type:'image/png',size:1.4e6,lastModified:Date.now()-2*86400000},
+ {name:'VID_20260714_193010.mp4',type:'video/mp4',size:188e6,lastModified:Date.now()-5*86400000},
+ {name:'VID_20260712_142522.mp4',type:'video/mp4',size:44e6,lastModified:Date.now()-7*86400000},
+ {name:'IMG_20260710_090101.jpg',type:'image/jpeg',size:4.6e6,lastModified:Date.now()-9*86400000},
+ {name:'IMG_20260710_090101_copy.jpg',type:'image/jpeg',size:4.6e6,lastModified:Date.now()-9*86400000}
+]}
+function startScan(files,isDemo=false){state.files=files;go('scan');$('#scanCount').textContent=files.length+' öğe';let p=0;const timer=setInterval(()=>{p=Math.min(100,p+Math.floor(Math.random()*13)+7);$('#progressBar').style.width=p+'%';$('#progressText').textContent='%'+p;$('#scanStatus').textContent=p<35?'Dosya türleri sınıflandırılıyor…':p<70?'Boyut ve ad örüntüleri inceleniyor…':'Öneriler hazırlanıyor…';if(p>=100){clearInterval(timer);setTimeout(()=>finishScan(files,isDemo),350)}},180)}
+function finishScan(files,isDemo){const photos=files.filter(f=>f.type?.startsWith('image/'));const videos=files.filter(f=>f.type?.startsWith('video/'));const total=files.reduce((a,f)=>a+(f.size||0),0);const screenshots=photos.filter(f=>/screenshot|ekran.?görüntüsü/i.test(f.name));const largeVideos=videos.filter(f=>(f.size||0)>100e6);const groups={};files.forEach(f=>{const key=(f.size||0)+'_'+(f.type||'');(groups[key]??=[]).push(f)});const dupes=Object.values(groups).filter(g=>g.length>1);const suggestions=[];if(screenshots.length)suggestions.push({id:'screens',icon:'▣',title:`${screenshots.length} ekran görüntüsü`,text:'Ekran görüntülerini ayrı bir albümde toplamak galeriyi sadeleştirebilir.',gain:fmt(screenshots.reduce((a,f)=>a+f.size,0)),count:screenshots.length});if(largeVideos.length)suggestions.push({id:'large',icon:'▶',title:`${largeVideos.length} büyük video`,text:'100 MB üzerindeki videolar depolamada en çok alanı kaplıyor.',gain:fmt(largeVideos.reduce((a,f)=>a+f.size,0)),count:largeVideos.length});if(dupes.length)suggestions.push({id:'dupes',icon:'⧉',title:`${dupes.length} olası kopya grup`,text:'Aynı tür ve boyuttaki dosyalar inceleme için eşleştirildi.',gain:'İncele',count:dupes.reduce((a,g)=>a+g.length,0)});if(!suggestions.length)suggestions.push({id:'clean',icon:'✓',title:'Galeri düzenli görünüyor',text:'Seçilen içerikte belirgin bir temizlik önerisi bulunamadı.',gain:'Temiz',count:0});state.stats={photos,videos,total,suggestions,isDemo};renderResults();go('results')}
+function fmt(n){if(n>=1e9)return (n/1e9).toFixed(1)+' GB';return (n/1e6).toFixed(n>1e8?0:1)+' MB'}
+function renderResults(){const s=state.stats;$('#mPhotos').textContent=s.photos.length;$('#mVideos').textContent=s.videos.length;$('#mSize').textContent=fmt(s.total);$('#mSuggestions').textContent=s.suggestions.length;$('#resultDate').textContent=new Date().toLocaleDateString('tr-TR',{day:'numeric',month:'short'});$('#suggestions').innerHTML=s.suggestions.map(x=>`<article class="card suggestion"><header><div><h3>${x.icon} ${x.title}</h3><p>${x.text}</p></div><span class="badge ${x.id==='clean'?'good':'warn'}">${x.gain}</span></header><footer><button class="mini" data-detail="${x.id}">Detay</button><button class="mini accent" data-add="${x.id}">${x.id==='clean'?'Tamam':'İncelemeye ekle'}</button></footer></article>`).join('');$$('[data-add]').forEach(b=>b.addEventListener('click',()=>addQueue(b.dataset.add)));$$('[data-detail]').forEach(b=>b.addEventListener('click',()=>showDetail(b.dataset.detail)))}
+function addQueue(id){const item=state.stats.suggestions.find(x=>x.id===id);if(!item||id==='clean')return showModal('Galeri hazır','Seçilen içerik için ek bir işlem gerekmiyor.');if(!state.queue.some(x=>x.id===id))state.queue.push(item);renderQueue();showModal('İncelemeye eklendi',`${item.title} için öneri kuyruğa alındı. Hiçbir dosya değiştirilmedi.`)}
+function renderQueue(){$('#queueCount').textContent=state.queue.length+' seçim';$('#queueList').innerHTML=state.queue.length?state.queue.map(x=>`<div class="row"><div class="thumb">${x.icon}</div><div class="info"><b>${x.title}</b><small>${x.text}</small></div><span class="badge">${x.gain}</span></div>`).join(''):'<div class="empty">Henüz bir öneri seçmedin.</div>'}
+function showDetail(id){const x=state.stats.suggestions.find(x=>x.id===id);showModal(x.title,`${x.text} Bu demo, gerçek dosyalara dokunmadan öneri akışını test eder.`)}
+$('#simulateBtn').addEventListener('click',()=>{if(!state.queue.length)return showModal('Kuyruk boş','Önce özet ekranından bir öneriyi incelemeye ekle.');showModal('Simülasyon tamamlandı',`${state.queue.length} öneri güvenli şekilde işlendi. Gerçek dosyalarda hiçbir değişiklik yapılmadı.`)});
+$('#clearQueue').addEventListener('click',()=>{state.queue=[];renderQueue()});
+$$('.switch').forEach(s=>s.addEventListener('click',()=>s.classList.toggle('on')));
+function showModal(t,x){$('#modalTitle').textContent=t;$('#modalText').textContent=x;$('#modal').classList.add('show')}
+$('#modalClose').addEventListener('click',()=>$('#modal').classList.remove('show'));$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')$('#modal').classList.remove('show')});
+if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body>
+</html>
