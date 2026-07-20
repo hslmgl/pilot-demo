@@ -1,13 +1,13 @@
 {
   "name": "Pilot — Medya Asistanı",
   "short_name": "Pilot",
-  "description": "Galerini güvenli ve kullanıcı onaylı önerilerle düzenleyen medya asistanı.",
-  "start_url": "./index.html",
+  "description": "Gizlilik odaklı kişisel medya asistanı demo sürümü.",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#080b10",
-  "theme_color": "#080b10",
-  "lang": "tr-TR",
+  "background_color": "#0a0d13",
+  "theme_color": "#0a0d13",
+  "lang": "tr",
   "icons": [
     {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png"},
     {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png"},

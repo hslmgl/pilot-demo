@@ -1,22 +1,36 @@
-# Pilot PWA Full Demo v1
+# Pilot PWA Full Demo v2
 
-Bu sürüm yalnızca Android telefonla test edilmek üzere hazırlanmış kurulabilir bir PWA demosudur.
+Pilot, gizlilik odaklı kişisel medya asistanı ürününün telefon üzerinde test edilebilen ikinci demo sürümüdür.
 
-## Ne yapar?
-- Telefon galerisinden kullanıcının seçtiği fotoğraf ve videoları yerel olarak okur.
-- Fotoğraf/video sayısı ve toplam boyutu hesaplar.
-- Ekran görüntülerini, 100 MB üzerindeki videoları ve aynı tür+boyuttaki olası kopyaları öneri olarak gösterir.
-- İnceleme kuyruğu ve işlem simülasyonu sunar.
-- Dosya yüklemez, silmez veya taşımaz.
-- İnternet kesildiğinde daha önce açılmış sürümü çevrimdışı çalıştırabilir.
+## Manifesto
 
-## Telefonda yayınlama (GitHub Pages)
-1. GitHub'da yeni, public bir depo oluşturun.
-2. Bu klasördeki tüm dosyaları depo köküne yükleyin. `index.html` kökte olmalı.
-3. Depoda Settings > Pages bölümüne gidin.
-4. Source: Deploy from a branch; Branch: main; Folder: /(root) seçin ve Save deyin.
-5. GitHub'ın verdiği HTTPS adresini Chrome'da açın.
-6. Chrome menüsünden "Ana ekrana ekle" / "Uygulamayı yükle" seçin.
+- Güven, yapay zekâdan önce gelir.
+- Pilot önerir; kullanıcı karar verir.
+- İlk tarama salt okunurdur.
+- Kullanıcı onayı olmadan hiçbir işlem yapılmaz.
+- Demo modu gerçek dosyalara dokunmaz.
+- Gizlilik ürünün temelidir.
 
-## Önemli sınır
-Web/PWA, Android'in tüm galerisini arka planda MediaStore gibi otomatik tarayamaz. Kullanıcı dosyaları seçer. Tam galeri erişimi, gerçek taşıma/silme ve Android medya izinleri için sonraki aşamada native Android uygulaması gerekir.
+## v2 yenilikleri
+
+- Sadeleştirilmiş ana ekran ve tek satırlık gizlilik garantisi
+- Sahte yüzde yerine aşamalı tarama
+- Tarama iptali
+- İncelenebilir alan ve tahmini inceleme süresi
+- Önizlemeli akıllı öneri kartları
+- Yüksek, orta ve düşük güven düzeyleri
+- Her öneri için açıklanabilir neden
+- Kopyaları yan yana karşılaştırma
+- Ekran görüntüleri ve büyük videolar için ayrı karar akışları
+- Sakla, kaldır, sıkıştır ve sonra karar ver seçenekleri
+- Cihazda saklanan demo işlem geçmişi
+- Çalışmayan anahtarlar yerine Gizlilik Merkezi
+- Ana Sayfa / İncele / Geçmiş / Ayarlar bilgi mimarisi
+
+## Çalıştırma
+
+`index.html` dosyasını tarayıcıda açarak örnek galeriyle deneyebilirsin. PWA olarak kurulum ve çevrimdışı çalışma için klasörü HTTPS üzerinden, örneğin GitHub Pages ile yayınla.
+
+## Güvenlik sınırı
+
+Bu demo gerçek dosya silmez, taşımaz veya sıkıştırmaz. Kullanıcı kararları yalnızca tarayıcının yerel depolamasındaki demo geçmişine yazılır.
