@@ -1,7 +1,7 @@
 {
   "name": "Pilot — Akıllı Galeri Asistanı",
   "short_name": "Pilot",
-  "description": "Yerel AI odaklı galeri düzenleme deneyimi",
+  "description": "Yerel AI yönlendirmeli, gizlilik odaklı galeri düzenleme uygulaması",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#090b12",
