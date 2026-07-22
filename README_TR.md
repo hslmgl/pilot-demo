@@ -1,31 +1,46 @@
-# Pilot v3.1
+# Pilot v3.2 — Yerel AI Yönlendirme
 
 Pilot, gizlilik odaklı akıllı galeri asistanıdır.
 
-## Akıllı yönlendirme
-Ana ekrandaki metin alanı artık yalnızca birkaç hazır komutu değil, her metni bir hedefe yönlendirir.
+## Bu sürümün ana değişikliği
 
-Desteklenen hedefler arasında:
-- Tüm galeri, klasör veya albüm taraması
-- Fotoğraf veya video odaklı tarama
-- Büyük medya, ekran görüntüsü, olası kopya ve eski medya incelemesi
-- Düzenleme ve güvenli temizlik akışları
-- Son analiz raporu ve sonuçları
-- İşlem geçmişi
-- Ayarlar ve gizlilik merkezi
-- Yardım
+Ana ekrandaki metin alanı artık yalnızca sabit komut aramaz. Kullanıcının günlük dilde, eksik, hatalı veya belirsiz biçimde anlattığı sorunu cihaz içinde yorumlayarak en yakın üç işlemi önerir.
 
-Bir komut net bir kategoriyle eşleşmezse kullanıcı boşta bırakılmaz; Pilot isteği genel akıllı galeri keşfine yönlendirir. Daha önce tarama yapılmışsa “kopyaları göster” veya “büyük videoları aç” gibi komutlar ilgili işlem ekranını doğrudan açabilir.
+Örnekler:
 
-## Bu sürümde
-- Doğal dilden hedef belirleyen yerel yönlendirme motoru
-- Yazım ve ifade farklılıklarına dayanıklı anahtar sözcük puanlama
-- Bağlama duyarlı yönlendirme
-- Tüm galeri, klasör ve albüm seçimi
-- Seçilen medyanın gerçek zamanlı yerel analizi
-- Detaylı analiz raporu
-- Ayıklama, düzenleme ve alan açma karar akışları
-- Yerel işlem geçmişi
+- “Telefonum doldu ama neyi silsem bilmiyorum” → Depolamada yer aç
+- “Galerim çok karışık, hiçbir şeyi bulamıyorum” → Galeriyi düzene sok
+- “Aynı şeyden çok var galiba” → Benzer ve olası kopyaları bul
+- “Sonra bakarım diye bir sürü şey kaydetmişim” → Ekran görüntülerini düzenle
+- “Eskiden kalanlara bakmak istiyorum” → Eski medyaları gözden geçir
 
-## Web platformu sınırı
-Android tarayıcısı tüm galeriye kullanıcı onayı olmadan erişemez ve dosyaları sistemden doğrudan silemez/taşıyamaz. Bu nedenle seçim kullanıcı tarafından yapılır; sonuçlar gerçek dosyalardan hesaplanır. Tam otomatik galeri taraması ve sistem onaylı gerçek dosya işlemleri native Android APK sürümünde MediaStore ile uygulanacaktır.
+## Yerel AI motoru
+
+Motor tamamen tarayıcı içinde çalışır ve şunları birlikte kullanır:
+
+- Türkçe metin normalizasyonu
+- Yazım hatası düzeltme
+- Türkçe ekleri sadeleştirme
+- Anlam kavramları ve problem örüntüleri
+- Karakter benzerliği ve kelime örtüşmesi
+- Birden fazla olası sonuç üretme
+- Güven düzeyi gösterme
+- Kullanıcının seçtiği yönlendirmeleri yalnızca cihazda hatırlama
+- “Evet”, “tamam”, “devam” gibi bağlamsal kısa cevapları anlama
+
+Net olmayan bir istekte Pilot kullanıcı adına kesin karar vermez. En yakın seçenekleri sunar ve seçimi kullanıcıya bırakır.
+
+## Sürüm görünürlüğü
+
+Sürüm numarası uygulamanın sol üst kısmında kalıcı olarak gösterilir. Bu paket `v3.2` olarak işaretlenmiştir.
+
+## Tarama ve işlem güvenliği
+
+- Galeri, klasör ve albüm seçimi kullanıcı onayıyla yapılır.
+- Seçilen medyanın analizi cihaz içinde gerçekleştirilir.
+- Pilot önerir; son kararı kullanıcı verir.
+- Onay olmadan silme, taşıma veya düzenleme işlemi uygulanmaz.
+
+## Android APK aşaması
+
+PWA içindeki yerel yönlendirme motoru tüm cihazlarda hızlı bir geri dönüş katmanı olarak korunacaktır. Uyumlu Android cihazlarda daha gelişmiş doğal dil anlama için cihaz üzerindeki üretken model katmanı eklenebilir; desteklenmeyen cihazlarda v3.2 motoru çalışmaya devam eder.
