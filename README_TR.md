@@ -1,46 +1,32 @@
-# Pilot v3.2 — Yerel AI Yönlendirme
+# Pilot PWA v3.3 Final
 
-Pilot, gizlilik odaklı akıllı galeri asistanıdır.
+Bu sürümde aşağıdakiler aktif hale getirildi:
 
-## Bu sürümün ana değişikliği
+- Sol üstte görünür sürüm etiketi: **v3.3**
+- ChatGPT/Gemini tarzı sade ana giriş ekranı
+- İstek yazarak yönlendirme
+- Tüm galeri / klasör / albüm / Pilot Örnek Albümü tarama
+- **Pilot Örnek Albümü**
+  - 4 kırmızı araba görseli
+  - 3 mavi atkılı görsel
+  - 2 beyaz güvercin görseli
+- Tarama sonrası önerilen işlemler
+- İşlem merkezinde çalışan aksiyonlar:
+  - **Albüm oluştur**
+  - **Taşı**
+  - **Kopyala**
+  - **Sil**
+- Oluşturulan albümler için Albümler ekranı
+- İşlem kayıtları için Geçmiş ekranı
 
-Ana ekrandaki metin alanı artık yalnızca sabit komut aramaz. Kullanıcının günlük dilde, eksik, hatalı veya belirsiz biçimde anlattığı sorunu cihaz içinde yorumlayarak en yakın üç işlemi önerir.
+## Telefon üzerinden GitHub'a yükleme (özet)
+1. GitHub repo aç.
+2. `Pilot_PWA_v3.3_Final.zip` dosyasını indir.
+3. Zip'i telefonda çıkar.
+4. Repo içine tüm dosyaları yükle.
+5. `index.html`, `manifest.webmanifest`, `sw.js`, `icons` ve `assets` klasörü birlikte gitmeli.
+6. Repo ayarlarından GitHub Pages açılırsa web demo olarak yayınlanabilir.
 
-Örnekler:
-
-- “Telefonum doldu ama neyi silsem bilmiyorum” → Depolamada yer aç
-- “Galerim çok karışık, hiçbir şeyi bulamıyorum” → Galeriyi düzene sok
-- “Aynı şeyden çok var galiba” → Benzer ve olası kopyaları bul
-- “Sonra bakarım diye bir sürü şey kaydetmişim” → Ekran görüntülerini düzenle
-- “Eskiden kalanlara bakmak istiyorum” → Eski medyaları gözden geçir
-
-## Yerel AI motoru
-
-Motor tamamen tarayıcı içinde çalışır ve şunları birlikte kullanır:
-
-- Türkçe metin normalizasyonu
-- Yazım hatası düzeltme
-- Türkçe ekleri sadeleştirme
-- Anlam kavramları ve problem örüntüleri
-- Karakter benzerliği ve kelime örtüşmesi
-- Birden fazla olası sonuç üretme
-- Güven düzeyi gösterme
-- Kullanıcının seçtiği yönlendirmeleri yalnızca cihazda hatırlama
-- “Evet”, “tamam”, “devam” gibi bağlamsal kısa cevapları anlama
-
-Net olmayan bir istekte Pilot kullanıcı adına kesin karar vermez. En yakın seçenekleri sunar ve seçimi kullanıcıya bırakır.
-
-## Sürüm görünürlüğü
-
-Sürüm numarası uygulamanın sol üst kısmında kalıcı olarak gösterilir. Bu paket `v3.2` olarak işaretlenmiştir.
-
-## Tarama ve işlem güvenliği
-
-- Galeri, klasör ve albüm seçimi kullanıcı onayıyla yapılır.
-- Seçilen medyanın analizi cihaz içinde gerçekleştirilir.
-- Pilot önerir; son kararı kullanıcı verir.
-- Onay olmadan silme, taşıma veya düzenleme işlemi uygulanmaz.
-
-## Android APK aşaması
-
-PWA içindeki yerel yönlendirme motoru tüm cihazlarda hızlı bir geri dönüş katmanı olarak korunacaktır. Uyumlu Android cihazlarda daha gelişmiş doğal dil anlama için cihaz üzerindeki üretken model katmanı eklenebilir; desteklenmeyen cihazlarda v3.2 motoru çalışmaya devam eder.
+## Not
+Bu PWA sürümünde aksiyonlar **uygulama içinde tepki verir**.
+Tarayıcı güvenliği sebebiyle gerçek Android sistem dosyası silme/taşıma işlemi native APK kadar tam yetkili değildir.
