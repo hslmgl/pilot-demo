@@ -1,9 +1,26 @@
-# Pilot v3
+# Pilot v3.1
 
 Pilot, gizlilik odaklı akıllı galeri asistanıdır.
 
+## Akıllı yönlendirme
+Ana ekrandaki metin alanı artık yalnızca birkaç hazır komutu değil, her metni bir hedefe yönlendirir.
+
+Desteklenen hedefler arasında:
+- Tüm galeri, klasör veya albüm taraması
+- Fotoğraf veya video odaklı tarama
+- Büyük medya, ekran görüntüsü, olası kopya ve eski medya incelemesi
+- Düzenleme ve güvenli temizlik akışları
+- Son analiz raporu ve sonuçları
+- İşlem geçmişi
+- Ayarlar ve gizlilik merkezi
+- Yardım
+
+Bir komut net bir kategoriyle eşleşmezse kullanıcı boşta bırakılmaz; Pilot isteği genel akıllı galeri keşfine yönlendirir. Daha önce tarama yapılmışsa “kopyaları göster” veya “büyük videoları aç” gibi komutlar ilgili işlem ekranını doğrudan açabilir.
+
 ## Bu sürümde
-- Yapay zekâ kitine yazılı komutla yönlendirme
+- Doğal dilden hedef belirleyen yerel yönlendirme motoru
+- Yazım ve ifade farklılıklarına dayanıklı anahtar sözcük puanlama
+- Bağlama duyarlı yönlendirme
 - Tüm galeri, klasör ve albüm seçimi
 - Seçilen medyanın gerçek zamanlı yerel analizi
 - Detaylı analiz raporu
