@@ -1,88 +1,102 @@
-# Pilot v3.4 — Çapraz Uzman İncelemesi
+# Pilot v3.5 — Dört Uzman QA Raporu
 
-Bu rapor, dört uzman rolüyle yürütülen ürün ve teknik incelemenin sonucudur. Harici insan onayı değildir; bağımsız uzman perspektiflerini simüle eden sistematik bir kalite kontrolüdür.
+## İnceleme kapsamı
+
+Son 9 gereksinim, Pilot manifestosu, mobil ekran akışı, yerel AI yönlendirmesi, işlem devamlılığı, geçmiş ve geri alma davranışı incelendi.
 
 ## 1. Kıdemli Mobil Uygulama Geliştiricisi
 
-### Tespit edilen sorunlar
-- v3.3 sürümünde **Taşı** işlemi hedef albümü oluşturuyor, ardından hedefteki öğeleri de kaldırarak albümü boş bırakıyordu.
-- Belirsiz kullanıcı cümleleri tek bir genel akışa düşüyor, kullanıcıya alternatif yönlendirme göstermiyordu.
-- Taşıma işleminde ikinci ve açık bir onay adımı bulunmuyordu.
+**Kontrol edilenler**
 
-### Uygulanan düzeltmeler
-- Taşıma mantığı kaynak ve hedef koleksiyon ayrımıyla yeniden yazıldı.
-- Hedef albümde taşınan öğelerin korunması doğrulandı.
-- Örnek albümden taşınan öğeler kaynaktan kaldırılıyor, hedefte kalıyor.
-- Belirsiz cümleler için üç önerili yerel yönlendirme motoru eklendi.
-- Taşıma öncesi son onay eklendi.
+- Alt menüde yalnızca Ana Sayfa, Araçlar, Geçmiş ve Ayarlar bulunması
+- İşlem ekranlarının ayrı rota olması fakat alt menüye eklenmemesi
+- Genel galeri, albüm ve klasör kapsamlarının her işlemde sorulması
+- Seçilen işlem dışında analiz kartı üretilmemesi
+- Silme, albüm, taşıma, düzenleme, kopya, ekran görüntüsü ve büyük medya kitlerinin bağımsız çalışması
+- Aktif işlemin sayfa geçişlerinde korunması
 
-**Karar: ONAYLANDI**
+**Karar:** PWA uygulama mantığı için onaylandı.
 
 ## 2. UI/UX Tasarımcısı
 
-### Kontrol edilen konular
-- Premium koyu tema ve mor vurgu sistemi
-- Görsel hiyerarşi
-- Ana işlem görünürlüğü
-- Destrüktif işlemlerde güvenli onay
-- Alt menü ve sürüm bilgisinin görünürlüğü
-- Boşta kalan buton veya tepkisiz aksiyon bulunup bulunmadığı
+**Kontrol edilenler**
 
-### Sonuç
-- v3.4 etiketi sol üstte sürekli görünür.
-- Yapay zekâ önerileri kullanıcı karar vermeden işlem başlatmaz.
-- Silme ve taşıma işlemleri açık onay ister.
-- Albüm oluşturma, kopyalama, taşıma ve silme işlemlerinin tamamı görünür geri bildirim verir.
-- “Demo” ve “test” ifadeleri kullanıcı arayüzünden kaldırılmıştır.
+- Ana sayfanın sade ve tek odaklı olması
+- Dört önerinin modal alt panelde sunulması
+- Panelin çarpı ve dış alanla kapanabilmesi
+- İşlem sayfalarının ana navigasyondan ayrıştırılması
+- Analiz ekranındaki sabit İŞLEMLER düğmesinin erişilebilir kalması
+- Koyu/açık tema ve kompakt görünümün gerçek arayüzü değiştirmesi
+- Yıkıcı eylemlerde onay adımı
 
-**Karar: ONAYLANDI**
+**Karar:** Onaylandı.
 
 ## 3. Mobil Ürün Yöneticisi
 
-### Manifesto uygunluğu
-- **Güven, yapay zekâdan önce gelir:** Uygun.
-- **Pilot önerir, kullanıcı karar verir:** Uygun.
-- **İlk tarama salt okunurdur:** Uygun.
-- **Onaysız destrüktif işlem yoktur:** Uygun.
-- **Gizlilik odaklıdır:** Uygun.
-- **Ürün iddiaları dürüsttür:** PWA içi işlemler ile Android sistem galerisindeki fiziksel işlemler birbirinden ayrılmıştır.
+**Kontrol edilenler**
 
-### Ürün istekleri
-- Yapay zekâ giriş ekranı: Tamamlandı.
-- Belirsiz isteklerde öneri: Tamamlandı.
-- Premium tema: Tamamlandı.
-- Tüm galeri / klasör / albüm tarama seçenekleri: Tamamlandı.
-- Detaylı rapor: Tamamlandı.
-- Önerilen aksiyonlar: Tamamlandı.
-- Örnek albüm ve doğal dil sorguları: Tamamlandı.
-- Versiyon numarası: Tamamlandı.
+- “Pilot önerir, kullanıcı karar verir” ilkesinin tüm akışta korunması
+- İlk taramanın salt okunur olması
+- Her işlemin kapsam ve son onayla ilerlemesi
+- Kullanıcının aktif görevini kaybetmemesi
+- Geçmiş ve geri alma ile güven oluşturulması
+- Fazladan alt menü sayfası eklenmemesi
+- Araç kitlerinin belirgin kullanıcı problemlerine karşılık gelmesi
 
-**Karar: ONAYLANDI — PWA kapsamı**
+**Karar:** PWA ürün kapsamı için onaylandı.
 
 ## 4. Mobil Yazılım Mühendisi
 
-### Teknik kontroller
-- JavaScript sözdizimi doğrulandı.
-- Manifest JSON ve ikon yolları doğrulandı.
-- Dokuz örnek görselin dosya yolları ve SVG yapıları doğrulandı.
-- Service Worker önbellek sürümü v3.4 olarak ayrıştırıldı.
-- Chromium mobil görünümünde etkileşim testleri çalıştırıldı.
-- Çalışma sırasında JavaScript hatası veya console error oluşmadı.
+**Kontrol edilenler**
 
-### Otomatik senaryo sonuçları
-1. Bilinmeyen kullanıcı cümlesi → 3 öneri: **PASS**
-2. “Kırmızı arabaları albüm yap” → 4 eşleşme: **PASS**
-3. Kırmızı Araba albümü oluşturma → 4 öğe: **PASS**
-4. Beyaz güvercinleri Kuşlar albümüne kopyalama → 2 öğe: **PASS**
-5. Mavi atkılıları Atkılar albümüne taşıma → hedefte 3 öğe: **PASS**
-6. Taşıma sonrası kaynak örnek albüm → 9’dan 6 öğeye düşme: **PASS**
-7. Silme onayı ve sonuçların güncellenmesi: **PASS**
-8. Albüm oluşturma / kopyalama / taşıma / silme geçmişi: **PASS**
-9. Detaylı rapor ekranı: **PASS**
-10. Mobil görünümde ana navigasyon: **PASS**
+- İş akışı durum makinesi: kapsam → tarama → analiz → aksiyon
+- Ana sayfada 4 dinamik öneri, araç kitlerinde 3 dinamik öneri
+- Yerel öğrenme ağırlıklarının cihaz içinde saklanması
+- Tarama sürerken başka sayfaya geçildiğinde işlemin devam etmesi
+- Uygulanan işlem için önce/sonra durumunun kaydedilmesi
+- Geri almanın yalnızca ilgili değişiklikleri tersine çevirmesi
+- Servis çalışanı önbellek sürümünün v3.5 olarak ayrılması
 
-**Karar: ONAYLANDI**
+**Karar:** Onaylandı.
 
-# Ortak karar
+## Otomatik mobil tarayıcı testleri
 
-Pilot v3.4, tanımlanmış PWA kapsamındaki kullanıcı akışları için dört rolün tamamından onay almıştır. Native Android’e özgü fiziksel sistem dosyası işlemleri bu sürümde tamamlanmış gibi gösterilmemiştir.
+Chromium, 390×844 mobil ekran boyutunda iki senaryo grubu çalıştırıldı.
+
+### Ana akış testleri — 16/16 geçti
+
+- v3.5 etiketi
+- Dört alt menü düğmesi
+- Giriş cümlesinden dört farklı öneri
+- Pop-up çarpı ve dış alan kapatma
+- Gizli işlem rotasına geçiş
+- Kırmızı araba sorgusunda dört doğru sonuç
+- Sabit İŞLEMLER düğmesi
+- Üç AI aksiyonu
+- Albüm oluşturma
+- Geçmiş kaydı
+- Geri alma
+- Araç kitinde üç seçenek
+- Sayfa değişiminde kaldığı yerden devam
+- Tema ayarı
+- Kompakt görünüm
+- JavaScript çalışma zamanı
+
+### Yıkıcı işlem ve geri alma testleri — 6/6 geçti
+
+- Silme kitinin yalnızca ekran görüntülerini ayıklaması
+- Silme işleminin geçmişe kaydolması
+- Silinen öğelerin geri alınması
+- Analiz aşamasının sayfa geçişinden sonra korunması
+- Geçmiş kaydının silinmesi
+- Aksiyon senaryolarında JavaScript hatası bulunmaması
+
+## Düzeltilen kritik hata
+
+İlk QA turunda geri alma sırasında `undefined` bir alanın JSON kopyasına alınması JavaScript hatasına yol açtı. Kopyalama yardımcısı ve alan bazlı geri alma algoritması düzeltildi. Düzeltme sonrasında iki test grubu yeniden çalıştırıldı ve tümü geçti.
+
+## Dürüst kapsam notu
+
+GitHub Pages/PWA, Android ortak galerisindeki fiziksel dosyaları sistem düzeyinde silme veya taşıma yetkisine sahip değildir. Bu sürümde işlemler Pilot’un gerçek uygulama durumu, albümleri, seçili medya kayıtları, geçmişi ve geri alma sistemi üzerinde çalışır.
+
+Fiziksel Android galeri değişiklikleri için aynı iş akışının MediaStore izinleriyle native APK içine aktarılması gerekir. Bu sınırlama saklanmamış ve uygulamada olmayan yetenek varmış gibi sunulmamıştır.
